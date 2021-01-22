@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Commissioning>
+	<!-- Ablauf der Inbetriebnahme Vers. 2020-05-15 -->
+	
+	<comm_item>"check all cable connections"</comm_item>
+	<comm_item>Main Switch ON ?</comm_item>
+	<comm_item>Controller ready ?</comm_item>
+	<comm_item>Inverter Ready ?</comm_item>
+	<comm_item>Way free and secure ?</comm_item>
+	<!-- Part 2 - first motion -->
+	<comm_item>Switch to inspection. Done ?</comm_item>
+	<comm_item>shortly Press UP - motion in right direction ?   </comm_item>
+	<comm_item>speed of motion correct ?</comm_item>
+	<comm_item>Breaking o.k. ?</comm_item>
+	<comm_item>Acceleration o.k. ?</comm_item>
+	<comm_item>shortly Press DOWN - motion in right direction ?   </comm_item>
+	<comm_item>speed of motion correct ?</comm_item>
+	<comm_item>Breaking o.k. ?</comm_item>
+	<comm_item>Acceleration o.k. ?</comm_item>
+	<comm_item>drive to highest station - ok? </comm_item>
+	<comm_item>drive to lowest station - ok?</comm_item>
+	<!-- Part 3 - stations -->
+	
+</Commissioning>
