@@ -2,7 +2,7 @@
 a software assistant, which makes you daily complex tasks more easy 
 
 
-<img src="first screen.png"/>
+<img src="firstscreen.png"/>
 
 
-!("firstscreen.png")
+
