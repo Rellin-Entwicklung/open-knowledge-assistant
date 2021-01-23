@@ -158,10 +158,10 @@ def Wizard():
     # for aktuell in params:
     # print("param.status "," ",aktuell,  param.status[aktuell])
 
-    ButtonNoOK = Button(master=para, text='NOT OK', command=irgendwas)
+    ButtonNoOK = Button(master=para, text='NOT OK', bg= 'red' , command=irgendwas)
     ButtonNoOK.place(x=220, y=320, width=150, height=60)
 
-    ButtonNext = Button(master=para, text='Function OK', command=next)
+    ButtonNext = Button(master=para, text='Function OK', bg ='green', command=next)
     ButtonNext.place(x=420, y=320, width=150, height=60)
 
     ButtonPhoto = Button(master=para, text='Add Photo', command=irgendwas)
