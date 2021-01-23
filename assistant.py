@@ -77,7 +77,7 @@ def Wizard():
         ctr = ctr + 1
         print("next aufgerufen ", ctr)
         info = "Step-No.:   " + str(ctr)
-        StepNr = Label(master=para, text=info)
+        StepNr = Label(master=para, text=info, font =fs02)
         StepNr.place(x=0, y=160, width=800, height=20)
         weiter = True
         # info = param.status[params[ctr]]
@@ -85,22 +85,22 @@ def Wizard():
         # Label(para, text=info).place(x=200, y=250, width=200, height=50)
 
         info = params[ctr]
-        Action = Label(master=para, text=info)
-        Action.place(x=300, y=220, width=250, height=20)
+        Action = Label(master=para, text=info, font =fs02)
+        Action.place(x=0, y=220, width=800, height=20)
         info = params1[ctr]
-        Label(para, text=info).place(x=300, y=260, width=200, height=20)
+        Label(para, text=info, font =fs02).place(x=0, y=260, width=800, height=20)
 
-    tree = ET.parse('commissioinng.xml')
+    tree = ET.parse('task01.xml')
     xml_root = tree.getroot()
     ActionList = []
     for action in xml_root.iter('comm_item'):
         ActionList.append(str(action.text.strip()))
     print("actions in List", ActionList)
-
-    params = ["Please start inspection drive up",
-              "Please start inspection drive down",
-              "up",
-              "down",
+    # das ist jetzt nur zum Testen, Werte kommen eigentlich aus der xml - Liste
+    params = ["Please Check: red Cable in connector 1",
+              "Please Check: blue Cable in connector 2",
+              "Please Check: green Cable in connector 3",
+              "Please Check: gray Cable in connector 4",
               "rated speed",
               "jog",
               "crawl",
@@ -114,10 +114,10 @@ def Wizard():
               "input_04",
               "input_05"]
 
-    params1 = ["Richtung (UP)  o.k ? speed o.k. ?",
-               "Richtung (DOWN) o.k ? speed o.k. ?",
-               "up",
-               "down",
+    params1 = ["Connection 1  o.k. ?",
+               "Connection 2  o.k. ?",
+               "Connection 3  o.k. ?",
+               "Connection 4  o.k. ?",
                "rated speed",
                "jog",
                "crawl",
@@ -132,8 +132,6 @@ def Wizard():
                "input_05"]
 
 
-    #fontStyle = tkFont.Font(family="Lucida Grande", size=20)
-    #fontStyle_1 = tkFont.Font(family="Lucida Grande", size=12)
     weiter = False
     ctr = 0
     print("commisioning wizard aufgerufen")
@@ -141,8 +139,10 @@ def Wizard():
     para.title('open knowledge assistant')
     para.geometry('800x500')
     # Seitenüberschrift
+    fs01="Helvetica 16 bold italic"
+    fs02 ="Helvetica 12 italic"
     ScreenTitle = Label(master=para,
-                        text='Task Assistant')
+                        text='Task Assistant',font=fs01)
     ScreenTitle.place(x=0, y=110, width=800, height=50)
 
     info = "project:  " + param.status["project"]
@@ -161,18 +161,22 @@ def Wizard():
     # print("param.status "," ",aktuell,  param.status[aktuell])
 
     ButtonNoOK = Button(master=para, text='NOT OK', command=irgendwas)
-    ButtonNoOK.place(x=200, y=320, width=150, height=20)
+    ButtonNoOK.place(x=220, y=320, width=150, height=60)
 
     ButtonNext = Button(master=para, text='Function OK', command=next)
-    ButtonNext.place(x=400, y=320, width=150, height=20)
-    weiter = True
-    #for aktuell in params:
-       # if weiter == True:
-       #     print("param.status ", " ", aktuell, param.status[aktuell])
-#
-         #   weiter = False
+    ButtonNext.place(x=420, y=320, width=150, height=60)
 
-    # eintragen in Datenbank
+    ButtonPhoto = Button(master=para, text='Add Photo', command=irgendwas)
+    ButtonPhoto.place(x=630, y=320, width=150, height=60)
+
+    ButtonComment = Button(master=para, text=' Add Comment', command=irgendwas)
+    ButtonComment.place(x=20, y=320, width=150, height=60)
+
+    weiter = True
+
+
+
+    # eintragen in Datenbank oder xml - file ergänzen
 
     para.mainloop()
 
