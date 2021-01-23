@@ -6,11 +6,15 @@ import tkinter.font as tkFont
 import xml.etree.ElementTree as ET
 import logging
 
+#Style = tkFont.Font(family="Lucida Grande", size=20)
+#fontStyle_1 = tkFont.Font(family="Lucida Grande", size=12)
+ctr = 0
+
 class param:
     status = {
         "project": "",
         "inverter": "",
-        "user": "PD",
+        "user": "Alex",
         "date/time": "",
         "Inp_BLOCK": "not used",
         "Inp_RUN": "not used",
@@ -73,7 +77,7 @@ def Wizard():
         ctr = ctr + 1
         print("next aufgerufen ", ctr)
         info = "Step-No.:   " + str(ctr)
-        StepNr = Label(master=para, text=info, font=fontStyle_1)
+        StepNr = Label(master=para, text=info)
         StepNr.place(x=0, y=160, width=800, height=20)
         weiter = True
         # info = param.status[params[ctr]]
@@ -81,7 +85,7 @@ def Wizard():
         # Label(para, text=info).place(x=200, y=250, width=200, height=50)
 
         info = params[ctr]
-        Action = Label(master=para, text=info, font=fontStyle_1)
+        Action = Label(master=para, text=info)
         Action.place(x=300, y=220, width=250, height=20)
         info = params1[ctr]
         Label(para, text=info).place(x=300, y=260, width=200, height=20)
@@ -133,8 +137,8 @@ def Wizard():
     weiter = False
     ctr = 0
     print("commisioning wizard aufgerufen")
-    para = Toplevel()
-    para.title('task assistant')
+    para = Tk()
+    para.title('open knowledge assistant')
     para.geometry('800x500')
     # Seitenüberschrift
     ScreenTitle = Label(master=para,
