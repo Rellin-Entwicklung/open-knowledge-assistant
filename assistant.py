@@ -6,8 +6,6 @@ import tkinter.font as tkFont
 import xml.etree.ElementTree as ET
 import logging
 
-#Style = tkFont.Font(family="Lucida Grande", size=20)
-#fontStyle_1 = tkFont.Font(family="Lucida Grande", size=12)
 ctr = 0
 
 class param:
