@@ -29,7 +29,7 @@ For the input of the steps, a more comfortable, specific editor is to be develop
 The knowledge, now still in the form of xml files, conceivably also as an ontology, should be available locally on the respective computer, as there is often no internet available on construction sites or in drive rooms and similar areas of use.
 
 
-<img src="https://github.com/Rellin-Entwicklung/open-knowledge-assistant/blob/main/doku-files/screen03.PNG"/>
+<img src="https://github.com/Rellin-Entwicklung/open-knowledge-assistant/blob/main/doku-files/screen04.PNG"/>
 
 
 
