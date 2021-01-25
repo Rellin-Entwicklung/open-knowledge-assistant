@@ -25,3 +25,5 @@ label[anchor]="W"
 label[justify]="left"
 
 durch die ständige Arbeit mit der Zeit wird es möglich, die Abrechnung mit dem Kunden zu belegen und Rückschlüsse über die interne eigene Effektivität zu ziehen
+
+Uhr soll integriert werden, ständige Anzeige, später erweiterung um diverse Timerfunktionen
