@@ -6,6 +6,11 @@ import tkinter.font as tkFont
 import xml.etree.ElementTree as ET
 import logging
 import time
+import imutils
+import cv2
+from PIL import Image
+from PIL import ImageTk
+
 
 
 ctr = 0
@@ -77,6 +82,45 @@ logging.basicConfig(
 def irgendwas():
     print("irgendwas")
 
+
+
+def photofunction():
+    def photo_quit():
+        root.destroy()
+    root = Toplevel()
+    cap = cv2.VideoCapture(0)
+    time.sleep(1)
+    # Capture frame-by-frame
+    ret, frame = cap.read()
+    time.sleep(1)
+    ret, frame = cap.read()
+
+    frame = imutils.resize(frame, width=300)
+
+    # OpenCV represents images in BGR order; however PIL
+    # represents images in RGB order, so we need to swap
+    # the channels, then convert to PIL and ImageTk format
+    image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+    image = Image.fromarray(image)
+    image = ImageTk.PhotoImage(image)
+
+
+
+    logo = (image)
+    w1 = Label(root, image=logo).pack(side="right")
+    explanation = """The open konwledge assistant takes pictures to document situations. 
+    If there is any text in the picture, the open knowledge assistent will find and recognize it
+    and save it in a separate file"""
+    w2 = Label(root,
+               justify=LEFT,
+               padx=10,
+               text=explanation).pack(side="left")
+    btn_close = Button(root, text = 'click to quit', command = photo_quit)
+    btn_close.pack()
+
+    root.mainloop()
+
 ScreenTitle = Label(master=para,
                     text='Task Assistant', font=fs01)
 ScreenTitle.place(x=0, y=110, width=800, height=50)
@@ -99,7 +143,7 @@ ButtonNoOK.place(x=220, y=320, width=150, height=60)
 
 
 
-ButtonPhoto = Button(master=para, text='Add Photo', command=irgendwas)
+ButtonPhoto = Button(master=para, text='Add Photo', command=photofunction)
 ButtonPhoto.place(x=630, y=320, width=150, height=60)
 
 ButtonComment = Button(master=para, text=' Add Comment', command=irgendwas)
