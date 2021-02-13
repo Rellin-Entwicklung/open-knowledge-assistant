@@ -87,28 +87,35 @@ def irgendwas():
 def photofunction():
     def photo_quit():
         root.destroy()
+
+    def photo_save():
+        print("save pic")
+        photo_quit()
     root = Toplevel()
     cap = cv2.VideoCapture(0)
-    time.sleep(1)
-    # Capture frame-by-frame
-    ret, frame = cap.read()
-    time.sleep(1)
-    ret, frame = cap.read()
+    def grab_frame():
+        time.sleep(1)
+        # Capture frame-by-frame
+        ret, frame = cap.read()
 
-    frame = imutils.resize(frame, width=300)
+        frame = imutils.resize(frame, width=300)
 
-    # OpenCV represents images in BGR order; however PIL
-    # represents images in RGB order, so we need to swap
-    # the channels, then convert to PIL and ImageTk format
-    image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        # OpenCV represents images in BGR order; however PIL
+        # represents images in RGB order, so we need to swap
+        # the channels, then convert to PIL and ImageTk format
+        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-    image = Image.fromarray(image)
-    image = ImageTk.PhotoImage(image)
+        image = Image.fromarray(image)
+        #image = ImageTk.PhotoImage(image)
+        return image
 
+    
+    logo = ImageTk.PhotoImage(grab_frame())
 
-
-    logo = (image)
-    w1 = Label(root, image=logo).pack(side="right")
+    image_label = Label(root)
+    image_label.config(image= logo)
+    image_label.pack(side="right")
+    #w1 = Label(root, image=logo).pack(side="right")
     explanation = """The open konwledge assistant takes pictures to document situations. 
     If there is any text in the picture, the open knowledge assistent will find and recognize it
     and save it in a separate file"""
@@ -118,8 +125,15 @@ def photofunction():
                text=explanation).pack(side="left")
     btn_close = Button(root, text = 'click to quit', command = photo_quit)
     btn_close.pack()
+    btn_save = Button(root, text=' save pic', command=photo_save)
+    btn_save.pack()
+
 
     root.mainloop()
+
+
+
+
 
 ScreenTitle = Label(master=para,
                     text='Task Assistant', font=fs01)

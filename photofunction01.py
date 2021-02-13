@@ -32,7 +32,9 @@ class PhotoWindow(tk.Tk):
         self.bild_holen()
 
 
-    def savePic
+    def savePic(self):
+        print("save pic")
+
 
 
 
