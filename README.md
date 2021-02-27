@@ -28,6 +28,12 @@ The entire process for a procedure is described in an xml file, which can then b
 For the input of the steps, a more comfortable, specific editor is to be developed (see issue), as the creation of the xml files is currently still done manually with standard editors.
 The knowledge, now still in the form of xml files, conceivably also as an ontology, should be available locally on the respective computer, as there is often no internet available on construction sites or in drive rooms and similar areas of use.
 
+In addition to the described functionality the system contains the following tools:
+
+OCR
+Barcode Reader
+QR.Code-Reader
+
 
 <img src="https://github.com/Rellin-Entwicklung/open-knowledge-assistant/blob/main/doku-files/screen04.PNG"/>
 
