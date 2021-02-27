@@ -8,23 +8,27 @@ import logging
 import time
 import imutils
 import cv2
+from pyzbar import pyzbar
 from PIL import Image
 from PIL import ImageTk
 
 
 
 ctr = 0
+counter = 0
 zeit = (" ")
+timerActive = False
 
 weiter = False
 ctr = 0
 print(" wizard aufgerufen")
 para = Tk()
 para.title('open knowledge assistant')
-para.geometry('800x500')
+para.geometry('1024x600')
 # Seitenüberschrift
 fs01 = "Helvetica 16 bold italic"
 fs02 = "Helvetica 12 italic"
+root = Tk()
 
 class param:
     status = {
@@ -82,6 +86,77 @@ logging.basicConfig(
 def irgendwas():
     print("irgendwas")
 
+def getBarcode():
+    def Barcode_quit():
+        root.destroy()
+
+    def Barcode_save():
+        print("save pic")
+        Barcode_quit()
+    def draw_barcode(decoded, image):
+        # n_points = len(decoded.polygon)
+        # for i in range(n_points):
+        #     image = cv2.line(image, decoded.polygon[i], decoded.polygon[(i+1) % n_points], color=(0, 255, 0), thickness=5)
+        image = cv2.rectangle(image, (decoded.rect.left, decoded.rect.top),
+                              (decoded.rect.left + decoded.rect.width, decoded.rect.top + decoded.rect.height),
+                              color=(0, 255, 0),
+                              thickness=5)
+        return image
+
+    def decode(image):
+        status = False
+        # decodes all barcodes from an image
+        decoded_objects = pyzbar.decode(image)
+        for obj in decoded_objects:
+            # draw the barcode
+            image = draw_barcode(obj, image)
+            # print barcode type & data
+            status = True
+            print("Type:", obj.type)
+            w1.config(text = obj.type)
+            print("Data:", obj.data)
+            w2.config(text = obj.data)
+            Success.config(text = 'Success')
+            print()
+
+        return image,status
+
+    cap = cv2.VideoCapture(0)
+    def getQR():
+        # read the frame from the camera
+        _, frame = cap.read()
+        # decode detected barcodes & get the image
+        # that is drawn
+        frame,status = decode(frame)
+        # show the image in the window
+        cv2.imshow("ocr erkannt wenn grüner Rand", frame)
+        print(status)
+        if status == True:
+            # TODO an dieser Stelle Sound einfügen
+            print("Erfolg")
+        #else:
+            #time.sleep(1)
+            #getQR()
+
+    root = Toplevel()
+    root.title('your assistents gets ocr / barcode')
+    root.geometry('600x400')
+    btn_close = Button(root, text='click to quit', command=Barcode_quit)
+    btn_close.pack()
+    btn_save = Button(root, text=' save content', command=Barcode_save)
+    btn_save.pack()
+    btn_save = Button(root, text=' new pic' ,command=getQR)
+    btn_save.pack()
+    Success= Label(root, text = 'no ocr /barcode found')
+    Success.pack()
+    w1 = Label(root,text='noch leer')
+    w1.pack()
+    w2 = Label(root,text='noch leer')
+    w2.pack()
+
+    getQR()
+
+    root.mainloop
 
 
 def photofunction():
@@ -132,6 +207,57 @@ def photofunction():
     root.mainloop()
 
 
+def timer_App():
+    global timerActive,root
+    def init():
+
+        y_start = 80
+        y_diff = 30
+        counter = 0
+        root = Toplevel()
+        winTimer = root
+        label = Label( root, text="", fg="Red", font=("Helvetica", 18))
+        label.place(x=50,y=y_start)
+        label1 = Label(root, text="label1", fg="Red", font=("Helvetica", 18))
+        label1.place(x=50,y= y_start +y_diff)
+        label2 = Label(text="label2", fg="Red", font=("Helvetica", 18))
+        label2.place(x=50, y= y_start + 2 * y_diff)
+        label3 = Label(text="label3", fg="Red", font=("Helvetica", 18))
+        label3.place(x=50, y= y_start + 3 * y_diff)
+        label4 = Label(text="label4", fg="Red", font=("Helvetica", 18))
+        label4.place(x=50, y= y_start + 4 * y_diff)
+        label5 = Label(text="label5", fg="Red", font=("Helvetica", 18))
+        label5.place(x=50, y= y_start + 5 * y_diff)
+        label6 = Label(text="label6", fg="Red", font=("Helvetica", 18))
+        label6.place(x=50, y= y_start + 6 * y_diff)
+        timerActive = True
+        intervall = 10
+        counter +=1
+        now = time.strftime("%H:%M:%S")
+
+        label.configure(text=now)
+        if counter == intervall:
+            label1.configure(bg='red')
+            print(now)
+        if counter == 2* intervall:
+            label2.configure(bg='red')
+        if counter == 3 * intervall:
+            label3.configure(bg='red')
+        if counter == 4 *intervall:
+            label4.configure(bg='red')
+
+        if counter == 5 * intervall:
+            label5.configure(bg='red')
+        if counter == 6 * intervall:
+            label6.configure(bg='red')
+            print(now)
+
+    init()
+    root.mainloop()
+
+
+
+
 
 
 
@@ -152,7 +278,7 @@ ProjectDate.place(x=650, y=20, width=800, height=20)
 clockDisp = Label(master=para ,text = zeit, anchor=W, justify=LEFT, font = fs01)
 clockDisp.place(x=650, y=430, width=200, height=20)
 
-ButtonNoOK = Button(master=para, text='NOT OK', bg='red', command=irgendwas)
+ButtonNoOK = Button(master=para, text='NOT OK', bg='red', command=timer_App)
 ButtonNoOK.place(x=220, y=320, width=150, height=60)
 
 
@@ -162,6 +288,32 @@ ButtonPhoto.place(x=630, y=320, width=150, height=60)
 
 ButtonComment = Button(master=para, text=' Add Comment', command=irgendwas)
 ButtonComment.place(x=20, y=320, width=150, height=60)
+y_line2 = 400
+
+ButtonTimer = Button(master=para, text=' Timer ', command=irgendwas)
+ButtonTimer.place(x=20, y=y_line2, width=150, height=60)
+
+ButtonFunc1 = Button(master=para, text='get barcode', command=getBarcode)
+ButtonFunc1.place(x=220, y=y_line2, width=150, height=60)
+
+ButtonFunc2 = Button(master=para, text=' function 2', command=irgendwas)
+ButtonFunc2.place(x=420, y=y_line2, width=150, height=60)
+
+y_line2 = 480
+
+ButtonFunc3 = Button(master=para, text=' function 3 ', command=irgendwas)
+ButtonFunc3.place(x=20, y=y_line2, width=150, height=60)
+
+ButtonFunc4 = Button(master=para, text=' function 4', command=irgendwas)
+ButtonFunc4.place(x=220, y=y_line2, width=150, height=60)
+
+ButtonFunc5 = Button(master=para, text=' function 5', command=irgendwas)
+ButtonFunc5.place(x=420, y=y_line2, width=150, height=60)
+
+
+
+
+
 
 date =""
 
@@ -170,21 +322,22 @@ date =""
 def clockPuls():
     global date
     global zeit
-    print("clock aufgerufen", zeit)
+    if timerActive == FALSE:
+        print("clock aufgerufen", zeit)
 
-    neuezeit = time.strftime('%H:%M:%S')
+        neuezeit = time.strftime('%H:%M:%S')
 
-    newdate = time. strftime("%d.%m.%Y")
+        newdate = time. strftime("%d.%m.%Y")
 
 
-    if newdate != date:
-        date = newdate
-        ProjectDate.config(text=date)
+        if newdate != date:
+            date = newdate
+            ProjectDate.config(text=date)
 
-    if neuezeit != zeit:
-        zeit = neuezeit
-        clockDisp.config(text=zeit)
-    clockDisp.after(500, clockPuls)
+        if neuezeit != zeit:
+            zeit = neuezeit
+            clockDisp.config(text=zeit)
+        clockDisp.after(500, clockPuls)
 
 
 
