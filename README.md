@@ -34,6 +34,6 @@ The knowledge, now still in the form of xml files, conceivably also as an ontolo
 
 <img src="https://github.com/Rellin-Entwicklung/open-knowledge-assistant/blob/main/doku-files/screen05.PNG"/>
 
-<img src="https://github.com/Rellin-Entwicklung/open-knowledge-assistant/blob/main/doku-files/barcode_screen06.PNG"
+<img src="https://github.com/Rellin-Entwicklung/open-knowledge-assistant/blob/main/doku-files/barcode_screen06.PNG"/>
 
 
