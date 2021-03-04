@@ -304,10 +304,10 @@ y_line2 = 480
 ButtonFunc3 = Button(master=para, text=' function 3 ', command=irgendwas)
 ButtonFunc3.place(x=20, y=y_line2, width=150, height=60)
 
-ButtonFunc4 = Button(master=para, text=' function 4', command=irgendwas)
+ButtonFunc4 = Button(master=para, text='send mail', command=irgendwas)
 ButtonFunc4.place(x=220, y=y_line2, width=150, height=60)
 
-ButtonFunc5 = Button(master=para, text=' function 5', command=irgendwas)
+ButtonFunc5 = Button(master=para, text='call website', command=irgendwas)
 ButtonFunc5.place(x=420, y=y_line2, width=150, height=60)
 
 
