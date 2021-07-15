@@ -11,6 +11,9 @@ import cv2
 from pyzbar import pyzbar
 from PIL import Image
 from PIL import ImageTk
+import os
+import mysql.connector
+import sys
 
 
 
@@ -59,7 +62,7 @@ class param:
         "motor_rated_speed": "1400",
         "motor_rated_torque": "7.5",
         "motor_rated_voltage": "3 * 400 V",
-        "motor_rated_current": " 27 A",
+        "note": "initialTest",
 
     }
 
@@ -74,7 +77,18 @@ print("einzelene Werte: ", param.status["project"])
 #fontStyle_1 = tkFont.Font(family="Lucida Grande", size=12)
 
 
-
+def logdata(msg):
+    jetzt = time.strftime
+    print(time.strftime("%d.%m.%Y %H:%M:%S"))
+    str_from_time_now = time.strftime("%d.%m.%Y %H:%M:%S")
+    try:
+        f = open("log_msg" + ".txt", "a")
+        #f = open("log_msg" + ".txt", "a")
+        f.write(str_from_time_now+ " " +str(msg)+"\n")
+        f.close()
+        print("Information geloggt",str_from_time_now)
+    except Exception as e:
+        print("Kann das verdammte File nicht oeffnen " + str(e) )
 
 
 logging.basicConfig(
@@ -206,6 +220,13 @@ def photofunction():
 
     root.mainloop()
 
+def ShowPic():
+    newPic = ImageTk.PhotoImage(file='C:/Users/StephanR/PycharmProjects/open-knowledge-assistant/Bild.gif')
+    #LabelPic = Label(root, image =newPic)
+    #LabelPic.place(x=5, y= 150, width =110, height = 150)
+    canvas = Canvas(root, width = 200, height = 200)
+    canvas.create_image(0, 0, anchor=NW, image=newPic)
+
 
 def timer_App():
     global timerActive,root
@@ -260,6 +281,117 @@ def timer_App():
 
 
 
+def clockPuls():
+    global date
+    global zeit
+    if timerActive == FALSE:
+
+
+        neuezeit = time.strftime('%H:%M:%S')
+
+        newdate = time. strftime("%d.%m.%Y")
+
+
+        if newdate != date:
+            date = newdate
+            ProjectDate.config(text=date)
+
+        if neuezeit != zeit:
+            zeit = neuezeit
+            clockDisp.config(text=zeit)
+        clockDisp.after(500, clockPuls)
+
+
+
+
+def next():
+
+    global weiter,PickDisp
+    global ctr
+    ctr = ctr + 1
+    print("next aufgerufen ", ctr)
+    info = "Step-No.:   " + str(ctr) +"  from: " + str(max)
+    StepNr = Label(master=para, text=info, font =fs02)
+    StepNr.place(x=0, y=160, width=800, height=20)
+    weiter = True
+        # info = param.status[params[ctr]]
+        ## TODO: eher brutale Methode, über config lösen !
+        # Label(para, text=info).place(x=200, y=250, width=200, height=50)
+
+    info = ActionList[ctr]
+    Action = Label(master=para, text=info, font =fs02)
+    Action.place(x=0, y=220, width=800, height=20)
+    #info = params1[ctr]
+    Label(para, text=info, font =fs02).place(x=0, y=260, width=800, height=20)
+
+    PickDisp.config(image = newPic1)
+
+
+    print("Aufrufposition:", os.getcwd())
+    print("Tats. Dateiposition:", __file__)
+    #ShowPic()
+
+
+def saveNote():
+    de_mo = True
+    #note = param.status["note"]
+    note = str(entryNote.get())
+    print("eingabe ",note)
+
+
+    global Nachricht
+    mydb = mysql.connector.connect(
+        host="h17386.web136.dogado.net",
+        user="h17386_stephan",
+        passwd="Ixam0001!",
+        database="h17386_org"
+    )
+
+    DB_Error = False
+
+    # Try to connect to DB
+
+    if de_mo: print("Versuche zu verbinden mit " + str(mydb))
+    #logdata("Versuche zu verbinden mit " + str(mydb))
+
+    try:
+        mycursor = mydb.cursor()
+    except:
+        logdata("timeout")
+        DB_Error = True
+
+    if not DB_Error:
+        if de_mo: print("DB-Verbindung steht\n")
+        #logdata(" DB-Verbindung steht")
+    else:
+        print("keine DB-Verbindung \n")
+        #logdata(" keine DB-Verbindung")
+
+    # Start Uebertragung
+    if not DB_Error:
+        try:
+            entryNote.configure(bg="green")
+            sql_string = """ INSERT INTO `organisation` (`main_content`) VALUES ("{phnote}");"""
+
+            sql_string_neu = sql_string.format(phnote = note)
+            # if de_mo: print(sql_string_neu)
+            mycursor.execute(sql_string_neu)
+            #entryNote.configure(bg="green")
+            print("erfolgreiche Speicherung \n")
+            entryNote.configure(bg="gray")
+            entryNote.delete(0,"end")
+        except:
+
+            if de_mo: print("Fehler DB:\t")
+            entryNote.configure(bg ="red")
+
+
+
+
+        mydb.commit()
+        mydb.close()
+
+
 
 ScreenTitle = Label(master=para,
                     text='Task Assistant', font=fs01)
@@ -277,9 +409,23 @@ ProjectDate.place(x=650, y=20, width=800, height=20)
 
 clockDisp = Label(master=para ,text = zeit, anchor=W, justify=LEFT, font = fs01)
 clockDisp.place(x=650, y=430, width=200, height=20)
+Bildname = 'Bild.gif'
+newPic = ImageTk.PhotoImage(file=Bildname)
+newPic1 = ImageTk.PhotoImage(file='Bild2.gif')
+PickDisp = Label(master = para, image = newPic)
+PickDisp.place(x=5, y=90, width=300, height=200)
 
 ButtonNoOK = Button(master=para, text='NOT OK', bg='red', command=timer_App)
 ButtonNoOK.place(x=220, y=320, width=150, height=60)
+
+entryFrame = Frame(para, bg = 'blue')
+entryFrame.place(x= 600, y=500, height = 80, width = 300)
+buttonEntry = Button(entryFrame,text ='save',command = saveNote)
+buttonEntry.pack (side = BOTTOM)
+entryNote=Entry(master=entryFrame, bg='white')
+entryNote.place(x=10, y=10, height = 30, width = 280)
+clockDisp = Label(master=entryFrame ,text = zeit, anchor=W, justify=LEFT, font = fs01)
+clockDisp.place(x=10, y=50, width=100, height=20)
 
 
 
@@ -318,49 +464,6 @@ ButtonFunc5.place(x=420, y=y_line2, width=150, height=60)
 date =""
 
 
-
-def clockPuls():
-    global date
-    global zeit
-    if timerActive == FALSE:
-        print("clock aufgerufen", zeit)
-
-        neuezeit = time.strftime('%H:%M:%S')
-
-        newdate = time. strftime("%d.%m.%Y")
-
-
-        if newdate != date:
-            date = newdate
-            ProjectDate.config(text=date)
-
-        if neuezeit != zeit:
-            zeit = neuezeit
-            clockDisp.config(text=zeit)
-        clockDisp.after(500, clockPuls)
-
-
-
-
-def next():
-
-    global weiter
-    global ctr
-    ctr = ctr + 1
-    print("next aufgerufen ", ctr)
-    info = "Step-No.:   " + str(ctr) +"  from: " + str(max)
-    StepNr = Label(master=para, text=info, font =fs02)
-    StepNr.place(x=0, y=160, width=800, height=20)
-    weiter = True
-        # info = param.status[params[ctr]]
-        ## TODO: eher brutale Methode, über config lösen !
-        # Label(para, text=info).place(x=200, y=250, width=200, height=50)
-
-    info = ActionList[ctr]
-    Action = Label(master=para, text=info, font =fs02)
-    Action.place(x=0, y=220, width=800, height=20)
-    #info = params1[ctr]
-    Label(para, text=info, font =fs02).place(x=0, y=260, width=800, height=20)
 
 tree = ET.parse('task01.xml')
 xml_root = tree.getroot()
