@@ -489,10 +489,10 @@ def saveNote():
     #print("Radiobutton: ",rb)
     global Nachricht
     mydb = mysql.connector.connect(
-        host="h17386.web136.dogado.net",
-        user="h17386_stephan",
-        passwd="Ixam0001!",
-        database="h17386_org"
+        host="xxx",
+        user="xxxx",
+        passwd="xxx",
+        database="xxxxx"
     )
 
     DB_Error = False
