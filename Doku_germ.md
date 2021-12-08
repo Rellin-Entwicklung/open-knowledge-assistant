@@ -5,8 +5,13 @@ Gedanken während der Entwicklung in deutsch, Grundlage für spätere Entwickler
 grundlegende Funktion:
 * Lesen von Schritten aus xml - File
 * Inhalte schrittweise anzeigen
-* bei jedem einzelnen Schritt Kommentar und Ergebnis festhalten
+* Bild / Skizze mit anzeigen, fall vorhanden
+* bei jedem einzelnen Schritt Erfolg, Kommentar und Ergebnis festhalten in einer datenbank
+* Schnittstelle zu Rechnungssystem / Warenwirtschaft / Lager
+* Generator, der aus Datrenbank dann wieder Protokolle mit Datum macht.
 alles abspeichern in gleicher xml
+
+* call webseite: wenn mit dem entsprechenden Schritt eine ebseite verlinkt ist (z.B. Doku im Intranet), dann wird diese mit diesem Button gerufen
 
 Damit wird eine Art automasisierte Checkliste realisiert, die einzelnen Punkte werden revisionssicher gespeichert
 

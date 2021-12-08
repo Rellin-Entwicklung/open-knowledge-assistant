@@ -14,8 +14,8 @@ from PIL import ImageTk
 import os
 import mysql.connector
 import sys
-
-
+projectsLi = ["ACC","Gluehwein","Sensors",]
+rb = 0
 
 ctr = 0
 counter = 0
@@ -337,8 +337,9 @@ def saveNote():
     #note = param.status["note"]
     note = str(entryNote.get())
     print("eingabe ",note)
-
-
+    IdxSel = project_list_sel.curselection()[0]
+    print("gelesen",IdxSel )
+    print("Radiobutton: ",rb)
     global Nachricht
     mydb = mysql.connector.connect(
         host="h17386.web136.dogado.net",
@@ -417,16 +418,34 @@ PickDisp.place(x=5, y=90, width=300, height=200)
 
 ButtonNoOK = Button(master=para, text='NOT OK', bg='red', command=timer_App)
 ButtonNoOK.place(x=220, y=320, width=150, height=60)
-
+#---------------------------------entry------------------------
 entryFrame = Frame(para, bg = 'blue')
-entryFrame.place(x= 600, y=500, height = 80, width = 300)
+entryFrame.place(x= 650, y=500, height = 80, width = 300)
+projSelFrame = Frame(para, bg = 'blue')
+projSelFrame.place(x= 650, y=400, height = 80, width = 300)
+project_list_sel= Listbox(projSelFrame)
+for project in projectsLi:
+    project_list_sel.insert("end",project)
+project_list_sel.pack()
 buttonEntry = Button(entryFrame,text ='save',command = saveNote)
 buttonEntry.pack (side = BOTTOM)
 entryNote=Entry(master=entryFrame, bg='white')
 entryNote.place(x=10, y=10, height = 30, width = 280)
 clockDisp = Label(master=entryFrame ,text = zeit, anchor=W, justify=LEFT, font = fs01)
 clockDisp.place(x=10, y=50, width=100, height=20)
+frameRadiobutton = Frame(para, bg='#FFCFC9')
+frameRadiobutton.place (x=5, y=5, width=110, height=80)
+radiobutton1 = Radiobutton(master=frameRadiobutton, anchor='w',
+                           text='HighLight', value=1 , variable=rb)
+radiobutton1.place(x=5, y=5, width=100, height=20)
+radiobutton2 = Radiobutton(master=frameRadiobutton, anchor='w',
+                           text='to do', value=2 , variable=rb)
+radiobutton2.place(x=5, y=25, width=100, height=20)
 
+
+radiobutton3 = Radiobutton(master=frameRadiobutton, anchor='w',
+                           text='weiss nicht', value=3 , variable=rb)
+radiobutton3.place(x=5, y=45, width=100, height=20)
 
 
 ButtonPhoto = Button(master=para, text='Add Photo', command=photofunction)
@@ -465,10 +484,10 @@ date =""
 
 
 
-tree = ET.parse('task01.xml')
+tree = ET.parse('task04.xml')
 xml_root = tree.getroot()
 ActionList = []
-for action in xml_root.iter('comm_item'):
+for action in xml_root.iter('step_item'):
     ActionList.append(str(action.text.strip()))
     print("actions in List", ActionList)
 max = len(ActionList)

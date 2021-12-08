@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Commissioning>
+	<!-- Rezept - new Version   2021-03-01 -->
+	
+	<step_item>"Glühwein - Regler "</step_item>
+	<check_item>" Marktführung "</check_item>
+	<pic_item> ""	</pic_item>
+	<com_item> ""	</com_item>
+	<rem_item> ""	</rem_item>
+
+
+	<step_item> "Steuerung Kaffee"</step_item>
+	<check_item>"       Software  "</check_item>
+	<pic_item> ""	</pic_item>
+	<com_item> ""	</com_item>
+	<rem_item> ""	</rem_item>
+
+	<step_item>Fernsteuerung Regner</step_item>
+	<check_item>""</check_item>
+	<pic_item> ""	</pic_item>
+	<com_item> ""	</com_item>
+	<rem_item> ""	</rem_item>
+
+	<step_item>Privat (vor Katastrophe)</step_item>
+	<check_item>""</check_item>
+	<pic_item> ""	</pic_item>
+	<com_item> ""	</com_item>
+	<rem_item> ""	</rem_item>
+
+	<step_item>Leegebruch-Automatisierung generell </step_item>
+	<check_item>"Controller ready [green LED] ?"</check_item>
+	<pic_item> ""	</pic_item>
+	<com_item> ""	</com_item>
+	<rem_item> ""	</rem_item>
+
+
+    <step_item>RR-der Super-Regler</step_item>
+	<check_item>jeden Tag ein Stück besser..</check_item>
+	<pic_item> ""	</pic_item>
+	<com_item> ""	</com_item>
+	<rem_item> ""	</rem_item>
+
+
+	<step_item> "Check Tank"</step_item>
+	<check_item>"       OK?  "</check_item>
+	<pic_item> ""	</pic_item>
+	<com_item> ""	</com_item>
+	<rem_item> ""	</rem_item>
+
+	<step_item>Wechsel Kühlmittel</step_item>
+	<check_item>""</check_item>
+	<pic_item> ""	</pic_item>
+	<com_item> ""	</com_item>
+	<rem_item> ""	</rem_item>
+
+	<step_item>Check Lichtmaschine</step_item>
+	<check_item>""</check_item>
+	<pic_item> ""	</pic_item>
+	<com_item> ""	</com_item>
+	<rem_item> ""	</rem_item>
+
+	<step_item>Messen Konzentration Frostschutz </step_item>
+	<check_item>"welche Konzentration ?"</check_item>
+	<pic_item> ""	</pic_item>
+	<com_item> ""	</com_item>
+	<rem_item> ""	</rem_item>
+
+
+
+
+
+>
+	
+</Commissioning>
