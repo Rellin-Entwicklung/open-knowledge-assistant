@@ -1,0 +1,4 @@
+21.04.2021 14:31:51 Versuche zu verbinden mit <mysql.connector.connection.MySQLConnection object at 0x11B33490>
+21.04.2021 14:31:51  DB-Verbindung steht
+21.04.2021 14:33:17 Versuche zu verbinden mit <mysql.connector.connection.MySQLConnection object at 0x110A34B0>
+21.04.2021 14:33:17  DB-Verbindung steht

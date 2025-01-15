@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Commissioning>
+	<!-- Rezept - new Version   2021-03-01 -->
+	
+	<step_item1>"black cable in connector 1"</step_item1>
+	<check_item1>" Connected ? "</check_item1>
+	<pic_item1> ""	</pic_item1>
+	<com_item1> ""	</com_item1>
+	<rem_item1> ""	</rem_item1>
+
+
+	<step_item2> "red cable in connector 2"</step_item2>
+	<check_item2>"Connected"</check_item2>
+	<pic_item2> ""	</pic_item2>
+	<com_item2> ""	</com_item2>
+	<rem_item2> ""	</rem_item2>
+
+	<step_item3>blue cable in connector 3</step_item3>
+	<check_item3>""</check_item3>
+	<pic_item3> ""	</pic_item3>
+	<com_item3> ""	</com_item3>
+	<rem_item3> ""	</rem_item3>
+
+	<step_item4>green cable in connector 4</step_item4>
+	<check_item4>""</check_item4>
+	<pic_item4> ""	</pic_item4>
+	<com_item4> ""	</com_item4>
+	<rem_item5> ""	</rem_item5>
+
+	<step_item5>Check green LED </step_item5>
+	<check_item5>"Controller ready [green LED] ?"</check_item5>
+	<pic_item5> ""	</pic_item5>
+	<com_item5> ""	</com_item5>
+	<rem_item5> ""	</rem_item5>
+
+
+
+
+
+
+>
+	
+</Commissioning>
